@@ -77,10 +77,10 @@ def consultar_pedidos(dni):
         con = sqlite.connect('/home/elena/Documents/web2py/applications/ServiciosSOAP/databases/tiendaBD')
         cur = con.cursor()
         cur.execute("SELECT * FROM pedidos p, producto_pedido pp, productos pr WHERE p.dni_cliente="+str(dni)+" AND p.id=pp.id_pedido AND pp.id_producto=pr.id")   
-        pedidos = ""
         results = cur.fetchall()
         id_pedido = 0
         for tupla in results:
+            if(id_pedido==0):pedidos=""
             if(tupla[0]!=id_pedido):
                 id_pedido=tupla[0]
                 pedidos += "<br> Numero de pedido: "+str(tupla[0])+" Fecha: "+str(tupla[2])+" precio total: "+str(tupla[3])+"<br>"
